@@ -70,7 +70,7 @@ public abstract class FireWorkBattery extends BlockFireWork {
 
     protected abstract Color randomColor();
 
-    protected void spawnRandomFirework(Location location) {
+    public void spawnRandomFirework(Location location) {
         Random rand = ThreadLocalRandom.current();
         Firework firework = (Firework) location.getWorld().spawnEntity(location.add(0, 1.5, 0), EntityType.FIREWORK);
         firework.setVelocity(new Vector((rand.nextBoolean() ? 1 : -1) * rand.nextDouble(0.02), rand.nextDouble(0.5, 1.5), (rand.nextBoolean() ? 1 : -1) * rand.nextDouble(0.02)));
