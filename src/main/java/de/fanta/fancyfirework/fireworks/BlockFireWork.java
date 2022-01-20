@@ -175,6 +175,19 @@ public abstract class BlockFireWork extends AbstractFireWork {
             this.bukkitTask = null;
         }
 
+        public Task(long duration, int delay, int period, Runnable taskToRun) {
+            this.player = null;
+            this.armorStand = null;
+            addTask(this);
+            this.duration = duration;
+            this.delay = delay;
+            this.period = period;
+            this.taskToRun = taskToRun;
+
+            this.tick = 0;
+            this.bukkitTask = null;
+        }
+
         /**
          * This method is called each tick, even while the delay hasn't passed yet.
          * Therefor the amount of times this method will be called is equal to <pre>duration + delay</pre>

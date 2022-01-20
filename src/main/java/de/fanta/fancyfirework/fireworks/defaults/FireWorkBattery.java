@@ -101,6 +101,16 @@ public abstract class FireWorkBattery extends BlockFireWork {
             this.spawnFirework = task -> {};
         }
 
+        public BatteryTask(long duration, int delay, int fireworkCooldown, int fountainCooldown) {
+            super(duration, delay, 0, null);
+            this.fireworkCooldown = fireworkCooldown;
+            this.fountainCooldown = fountainCooldown;
+            this.fireworkCounter = 0;
+            this.fountainCounter = 0;
+            this.spawnFountain = task -> new Fountain(40, 10);
+            this.spawnFirework = task -> {};
+        }
+
         @Override
         public FireWorkBattery getFirework() {
             return FireWorkBattery.this;
