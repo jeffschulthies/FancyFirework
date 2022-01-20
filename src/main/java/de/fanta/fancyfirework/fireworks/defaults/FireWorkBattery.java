@@ -24,7 +24,7 @@ import java.util.function.Function;
 
 public abstract class FireWorkBattery extends BlockFireWork {
 
-    protected FireWorkBattery(NamespacedKey namespacedKey) {
+    public FireWorkBattery(NamespacedKey namespacedKey) {
         super(namespacedKey);
     }
 
