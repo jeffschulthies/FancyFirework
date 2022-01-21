@@ -61,7 +61,12 @@ public class FireWorkWorks {
             Firework firework = (Firework) world.spawnEntity(loc, EntityType.FIREWORK);
             firework.setVelocity(new Vector((rand.nextBoolean() ? 1 : -1) * rand.nextDouble(0.01), rand.nextDouble(0.5, 1.5), (rand.nextBoolean() ? 1 : -1) * rand.nextDouble(0.01)));
             FireworkMeta fireworkMeta = firework.getFireworkMeta();
-            FireworkEffect effect = FireworkEffect.builder().with(FireworkEffect.Type.values()[rand.nextInt(FireworkEffect.Type.values().length)]).withColor(randomColor()).withFade(randomColor()).withFlicker().withTrail().build();
+            FireworkEffect effect = FireworkEffect.builder()
+                    .with(FireworkEffect.Type.values()[rand.nextInt(FireworkEffect.Type.values().length)])
+                    .withColor(randomColor()).withFade(randomColor())
+                    .withFlicker()
+                    .withTrail()
+                    .build();
             fireworkMeta.addEffect(effect);
             fireworkMeta.setPower(rand.nextInt(2) + 1);
             firework.setFireworkMeta(fireworkMeta);

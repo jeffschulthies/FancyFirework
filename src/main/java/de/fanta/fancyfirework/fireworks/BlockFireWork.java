@@ -121,7 +121,12 @@ public abstract class BlockFireWork extends AbstractFireWork {
     }
 
     private void addTask(Task task) {
-        UUID uuid = task.armorStand.getUniqueId();
+        UUID uuid;
+        if (task.armorStand == null) {
+            uuid = task.uuid;
+        } else {
+            uuid = task.armorStand.getUniqueId();
+        }
         if (activeTasks.containsKey(uuid)) {
             activeTasks.get(uuid).stop();
         }
@@ -129,7 +134,11 @@ public abstract class BlockFireWork extends AbstractFireWork {
     }
 
     private void removeTask(Task task) {
-        activeTasks.remove(task.armorStand.getUniqueId());
+        if (task.armorStand == null) {
+            activeTasks.remove(task.uuid);
+        } else {
+            activeTasks.remove(task.armorStand.getUniqueId());
+        }
     }
 
     /**
@@ -143,6 +152,7 @@ public abstract class BlockFireWork extends AbstractFireWork {
 
         protected final Player player;
         protected final ArmorStand armorStand;
+        protected UUID uuid;
 
         protected final long duration;
         protected final int delay;

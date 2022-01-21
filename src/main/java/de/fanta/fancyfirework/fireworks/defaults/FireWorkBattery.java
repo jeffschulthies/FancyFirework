@@ -18,6 +18,7 @@ import org.bukkit.util.Vector;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -128,6 +129,7 @@ public abstract class FireWorkBattery extends BlockFireWork {
             this.fountainCounter = 0;
             this.spawnFountain = task -> new Fountain(40, 10);
             this.spawnFirework = task -> {};
+            this.uuid = new UUID(10, 10);
         }
 
         @Override
