@@ -59,7 +59,7 @@ public abstract class FireWorkBattery extends BlockFireWork {
 
     @Override
     public void onLit(Location location) {
-        BatteryTask batteryTask = new BatteryTask(20 * 60, 20 * 5, 20, random.nextInt(20 * 5, 20 * 13));
+        BatteryTask batteryTask = new BatteryTask(location, 20 * 60, 20 * 5, 20, random.nextInt(20 * 5, 20 * 13));
         batteryTask.setSpawnFireworkTask(task -> spawnRandomFirework(location));
         batteryTask.setSpawnFountainTask(task -> {
             //Create fountain
@@ -78,13 +78,24 @@ public abstract class FireWorkBattery extends BlockFireWork {
 
     @Override
     public void onTick(Task task, boolean active) {
-        Location loc = task.getArmorStand().getLocation().add(0, 1.5, 0);
-        loc.getWorld().spawnParticle(Particle.FLAME, loc, 1, 0, 0, 0, 0.025);
+        if (task.getArmorStand() != null) {
+            Location loc = task.getArmorStand().getLocation().add(0, 1.5, 0);
+            loc.getWorld().spawnParticle(Particle.FLAME, loc, 1, 0, 0, 0, 0.025);
 
-        if (task instanceof BatteryTask batteryTask) {
-            if (batteryTask.fountainCounter == 0) {
-                batteryTask.fountainCooldown = random.nextInt(20 * 4, 20 * 8);
+            if (task instanceof BatteryTask batteryTask) {
+                if (batteryTask.fountainCounter == 0) {
+                    batteryTask.fountainCooldown = random.nextInt(20 * 4, 20 * 8);
+                }
             }
+        } else {
+            task.getLocation().getWorld().spawnParticle(Particle.FLAME, task.getLocation(), 1, 0, 0, 0, 0.025);
+
+            if (task instanceof BatteryTask batteryTask) {
+                if (batteryTask.fountainCounter == 0) {
+                    batteryTask.fountainCooldown = random.nextInt(20 * 4, 20 * 8);
+                }
+            }
+
         }
     }
 
@@ -121,8 +132,8 @@ public abstract class FireWorkBattery extends BlockFireWork {
             this.spawnFirework = task -> {};
         }
 
-        public BatteryTask(long duration, int delay, int fireworkCooldown, int fountainCooldown) {
-            super(duration, delay, 0, null);
+        public BatteryTask(Location location, long duration, int delay, int fireworkCooldown, int fountainCooldown) {
+            super(location, duration, delay, 0, null);
             this.fireworkCooldown = fireworkCooldown;
             this.fountainCooldown = fountainCooldown;
             this.fireworkCounter = 0;

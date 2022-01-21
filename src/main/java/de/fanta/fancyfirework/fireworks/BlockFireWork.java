@@ -154,6 +154,12 @@ public abstract class BlockFireWork extends AbstractFireWork {
         protected final ArmorStand armorStand;
         protected UUID uuid;
 
+        public Location getLocation() {
+            return location;
+        }
+
+        protected Location location;
+
         protected final long duration;
         protected final int delay;
         protected final int period;
@@ -187,9 +193,10 @@ public abstract class BlockFireWork extends AbstractFireWork {
             this.bukkitTask = null;
         }
 
-        public Task(long duration, int delay, int period, Runnable taskToRun) {
+        public Task(Location location, long duration, int delay, int period, Runnable taskToRun) {
             this.player = null;
             this.armorStand = null;
+            this.location = location;
             addTask(this);
             this.duration = duration;
             this.delay = delay;
@@ -232,7 +239,7 @@ public abstract class BlockFireWork extends AbstractFireWork {
                 if(tick < duration + delay && armorStand == null) {
                     onTick();
                     tick++;
-                } if (tick < duration + delay && armorStand.isValid()) {
+                } else if (tick < duration + delay && armorStand.isValid()) {
                     onTick();
                     tick++;
                 } else {
