@@ -229,7 +229,10 @@ public abstract class BlockFireWork extends AbstractFireWork {
             this.tick = 0;
             this.counter = 0;
             this.bukkitTask = Bukkit.getScheduler().runTaskTimer(FancyFirework.getPlugin(), () -> {
-                if (tick < duration + delay && armorStand.isValid()) {
+                if(tick < duration + delay && armorStand == null) {
+                    onTick();
+                    tick++;
+                } if (tick < duration + delay && armorStand.isValid()) {
                     onTick();
                     tick++;
                 } else {
