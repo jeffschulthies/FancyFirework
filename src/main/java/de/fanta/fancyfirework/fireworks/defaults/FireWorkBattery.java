@@ -66,7 +66,7 @@ public abstract class FireWorkBattery extends BlockFireWork {
             Fountain fountain = new Fountain(random.nextInt(20 * 6, 20 * 8), random.nextInt(5, 10));
             fountain.setCreateEffects(() -> {
                 //Create next fountain effect/s
-                FountainEffect effect = new FountainEffect(random.nextInt(6, 20), random.nextDouble(0.4, 1), random.nextDouble(359), random.nextDouble(6));
+                FountainEffect effect = new FountainEffect(random.nextInt(6, 16), random.nextDouble(0.4, 1), random.nextDouble(359), random.nextDouble(6));
                 effect.setSpawnParticle(l -> l.getWorld().spawnParticle(Particle.REDSTONE, l, 6, new Particle.DustOptions(randomColor(), 1.5f)));
 
                 return List.of(effect);

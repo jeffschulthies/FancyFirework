@@ -261,7 +261,9 @@ public abstract class BlockFireWork extends AbstractFireWork {
 
                 //Reset task & remove block + marker entity
                 removeTask(this);
-                armorStand.remove();
+                if (armorStand != null) {
+                    armorStand.remove();
+                }
             }
         }
 
