@@ -57,6 +57,25 @@ public abstract class FireWorkBattery extends BlockFireWork {
     }
 
     @Override
+    public void onLit(Location location) {
+        BatteryTask batteryTask = new BatteryTask(20 * 60, 20 * 5, 20, random.nextInt(20 * 5, 20 * 13));
+        batteryTask.setSpawnFireworkTask(task -> spawnRandomFirework(location));
+        batteryTask.setSpawnFountainTask(task -> {
+            //Create fountain
+            Fountain fountain = new Fountain(random.nextInt(20 * 6, 20 * 8), random.nextInt(5, 10));
+            fountain.setCreateEffects(() -> {
+                //Create next fountain effect/s
+                FountainEffect effect = new FountainEffect(random.nextInt(6, 20), random.nextDouble(0.4, 1), random.nextDouble(359), random.nextDouble(6));
+                effect.setSpawnParticle(l -> l.getWorld().spawnParticle(Particle.REDSTONE, l, 6, new Particle.DustOptions(randomColor(), 1.5f)));
+
+                return List.of(effect);
+            });
+            return fountain;
+        });
+        batteryTask.start();
+    }
+
+    @Override
     public void onTick(Task task, boolean active) {
         Location loc = task.getArmorStand().getLocation().add(0, 1.5, 0);
         loc.getWorld().spawnParticle(Particle.FLAME, loc, 1, 0, 0, 0, 0.025);

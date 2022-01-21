@@ -59,6 +59,8 @@ public abstract class BlockFireWork extends AbstractFireWork {
      */
     public abstract void onLit(ArmorStand stand, @Nullable Player player);
 
+    public abstract void onLit(Location location);
+
     /**
      * Called when a task of this firework executes a tick.
      *
